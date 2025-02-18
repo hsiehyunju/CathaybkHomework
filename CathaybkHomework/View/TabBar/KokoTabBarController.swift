@@ -18,7 +18,7 @@ class KokoTabBarController : UITabBarController {
     
 }
 
-extension KokoTabBarController {
+fileprivate extension KokoTabBarController {
     
     /** 初始設定 TabBar */
     func setupTabBarParam() {
