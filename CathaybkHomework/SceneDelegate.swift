@@ -18,6 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        // 調整 Navigation tint
+        UINavigationBar.appearance().tintColor = UIColor(named: "tabSelectedColor")
+        
         window?.rootViewController = KokoTabBarController()
         window?.makeKeyAndVisible()
     }

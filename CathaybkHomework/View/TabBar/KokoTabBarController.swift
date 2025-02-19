@@ -38,21 +38,26 @@ fileprivate extension KokoTabBarController {
         
         // 錢錢
         let moneyVC = MoneyPageViewController()
+        moneyVC.addNavigationItem()
         moneyVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarProductsOff"), tag: 0)
         
         // 朋友
         let friendVC = FriendPageViewController()
+        friendVC.addNavigationItem()
         friendVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarFriendsOn"), tag: 1)
         
         // KOKO
         let kokoVC = UIViewController()
+        kokoVC.addNavigationItem()
         kokoVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarHomeOff"), tag: 2)
         
         // 記帳
         let trackVC = TrackSpendingPageViewController()
+        trackVC.addNavigationItem()
         trackVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarManageOff"), tag: 3)
         // 設定
         let setting = SettingPageViewController()
+        setting.addNavigationItem()
         setting.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarSettingOff"), tag: 4)
         
         viewControllers = [
