@@ -61,7 +61,12 @@ class FriendRepository : FriendRepositoryProtocol {
         }
 
         return URLSession.shared.dataTaskPublisher(for: requestURL)
-            .map(\.data)
+            .tryMap{ (data, response) -> Data in
+                guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
+                    throw ENetworkError.responseError
+                }
+                return data
+            }
             .decode(type: T.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
