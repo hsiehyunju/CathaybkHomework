@@ -57,7 +57,8 @@ fileprivate extension KokoTabBarController {
         moneyVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarProductsOff"), tag: 0)
         
         // 朋友
-        let friendVC = FriendPageViewController()
+        let storyboard = UIStoryboard(name: "FriendPageViewController", bundle: nil)
+        let friendVC = storyboard.instantiateViewController(identifier: "\(FriendPageViewController.self)") as! FriendPageViewController
         friendVC.addNavigationItem()
         friendVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "icTabbarFriendsOn"), tag: 1)
         
