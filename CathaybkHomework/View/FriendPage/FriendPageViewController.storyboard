@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,6 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVj-lh-vjU" userLabel="UserInfoView" customClass="UserInfoView" customModule="CathaybkHomework" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="59" width="393" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="7Kh-Cx-mbg"/>
+                                </constraints>
+                            </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="Zng-bw-SdW">
                                 <rect key="frame" x="186" y="416" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -22,9 +30,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UVj-lh-vjU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4yJ-PC-qgT"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UVj-lh-vjU" secondAttribute="trailing" id="d85-Cb-8PO"/>
+                            <constraint firstItem="UVj-lh-vjU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="pJO-8N-uRT"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="indicator" destination="Zng-bw-SdW" id="oxI-i0-K6z"/>
+                        <outlet property="userInfoView" destination="UVj-lh-vjU" id="iMA-xT-4MO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -32,4 +46,9 @@
             <point key="canvasLocation" x="117" y="-28"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

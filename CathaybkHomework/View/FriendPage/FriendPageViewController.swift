@@ -11,6 +11,7 @@ import Combine
 class FriendPageViewController : UIViewController {
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var userInfoView: UserInfoView!
     
     let viewModel = FriendViewModel()
     
@@ -25,7 +26,6 @@ class FriendPageViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.showFriendRequestSelection { type in
-            print("選了 \(type)")
             self.viewModel.fetchFriendList(requestType: type)
         }
     }
@@ -50,6 +50,15 @@ class FriendPageViewController : UIViewController {
             }
             .store(in: &cancellables)
         
+        // UserInfo 綁定
+        viewModel.$userInfo
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                if let userData = data {
+                    self?.userInfoView.setData(user: userData)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     /** 初始化資料 */
@@ -74,3 +83,6 @@ class FriendPageViewController : UIViewController {
         present(alert, animated: true)
     }
 }
+
+
+
