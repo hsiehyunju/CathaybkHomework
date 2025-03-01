@@ -130,6 +130,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="tabSelectedColor"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psv-Np-NWz" userLabel="Empty View" customClass="EmptyFriendView" customModule="CathaybkHomework" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="349" width="393" height="469"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="Zng-bw-SdW">
                                 <rect key="frame" x="186" y="416" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -147,23 +151,29 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="V3f-rb-OUM" secondAttribute="trailing" id="IcY-LQ-hCR"/>
                             <constraint firstItem="1YL-e2-1G3" firstAttribute="leading" secondItem="UVj-lh-vjU" secondAttribute="leading" id="O6N-OS-zfh"/>
                             <constraint firstItem="BHU-Uo-v4M" firstAttribute="top" secondItem="cg0-mx-gOy" secondAttribute="bottom" constant="20" id="T6u-Y7-zpu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="psv-Np-NWz" secondAttribute="bottom" id="Xah-Ix-ISN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="BHU-Uo-v4M" secondAttribute="trailing" constant="20" id="azn-AW-8lk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UVj-lh-vjU" secondAttribute="trailing" id="d85-Cb-8PO"/>
                             <constraint firstItem="X3W-32-Iz7" firstAttribute="top" secondItem="1YL-e2-1G3" secondAttribute="bottom" constant="20" id="dse-rR-zr2"/>
+                            <constraint firstItem="psv-Np-NWz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ekz-hc-n9G"/>
                             <constraint firstItem="cg0-mx-gOy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iXK-U4-AXg"/>
                             <constraint firstItem="1YL-e2-1G3" firstAttribute="top" secondItem="UVj-lh-vjU" secondAttribute="bottom" id="kw1-5m-KCC"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="psv-Np-NWz" secondAttribute="trailing" id="p9N-xG-8p3"/>
                             <constraint firstItem="UVj-lh-vjU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="pJO-8N-uRT"/>
                             <constraint firstItem="X3W-32-Iz7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="rJw-6M-tHu"/>
                             <constraint firstItem="BHU-Uo-v4M" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="tGM-FZ-W74"/>
                             <constraint firstItem="V3f-rb-OUM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tyT-Xp-krD"/>
                             <constraint firstItem="cg0-mx-gOy" firstAttribute="top" secondItem="X3W-32-Iz7" secondAttribute="bottom" id="vmd-Bg-ZTa"/>
+                            <constraint firstItem="psv-Np-NWz" firstAttribute="top" secondItem="X3W-32-Iz7" secondAttribute="bottom" constant="10" id="x4J-q3-mWi"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyView" destination="psv-Np-NWz" id="aho-kr-DQe"/>
                         <outlet property="friendListTableView" destination="V3f-rb-OUM" id="8En-vm-2LT"/>
                         <outlet property="indicator" destination="Zng-bw-SdW" id="oxI-i0-K6z"/>
                         <outlet property="inviteStackView" destination="1YL-e2-1G3" id="t4g-Be-lxL"/>
                         <outlet property="searchBar" destination="H6l-oU-e46" id="GnD-0b-PAc"/>
+                        <outlet property="searchGroupView" destination="BHU-Uo-v4M" id="Bh0-tt-OFN"/>
                         <outlet property="userInfoView" destination="UVj-lh-vjU" id="iMA-xT-4MO"/>
                     </connections>
                 </viewController>

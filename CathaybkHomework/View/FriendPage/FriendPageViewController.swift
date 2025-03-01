@@ -15,6 +15,8 @@ class FriendPageViewController : UIViewController {
     @IBOutlet weak var inviteStackView: UIStackView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var friendListTableView: UITableView!
+    @IBOutlet weak var searchGroupView: UIStackView!
+    @IBOutlet weak var emptyView: EmptyFriendView!
     
     var heightConstraint: NSLayoutConstraint!
     
@@ -82,6 +84,19 @@ fileprivate extension FriendPageViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
             } receiveValue: { [weak self] friends in
+                
+                if (friends.isEmpty) {
+                    self?.emptyView.isHidden = false
+                    self?.friendListTableView.isHidden = true
+                    self?.searchGroupView.isHidden = true
+                } else {
+                    
+                    self?.emptyView.isHidden = true
+                    self?.friendListTableView.isHidden = false
+                    self?.searchGroupView.isHidden = false
+                }
+                
+                
                 self?.friendListTableView.reloadData()
                 self?.heightConstraint.constant = friends.count > 0 ? 150 : 0
                 self?.view.layoutIfNeeded()
@@ -115,12 +130,10 @@ fileprivate extension FriendPageViewController {
 
 extension FriendPageViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("123 \(searchText)")
         self.viewModel.filterFriend(input: searchText)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("555")
         self.viewModel.filterFriend(input: "")
     }
 }
