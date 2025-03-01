@@ -163,6 +163,7 @@
                         <outlet property="friendListTableView" destination="V3f-rb-OUM" id="8En-vm-2LT"/>
                         <outlet property="indicator" destination="Zng-bw-SdW" id="oxI-i0-K6z"/>
                         <outlet property="inviteStackView" destination="1YL-e2-1G3" id="t4g-Be-lxL"/>
+                        <outlet property="searchBar" destination="H6l-oU-e46" id="GnD-0b-PAc"/>
                         <outlet property="userInfoView" destination="UVj-lh-vjU" id="iMA-xT-4MO"/>
                     </connections>
                 </viewController>

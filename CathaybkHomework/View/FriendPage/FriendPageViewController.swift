@@ -13,7 +13,10 @@ class FriendPageViewController : UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var userInfoView: UserInfoView!
     @IBOutlet weak var inviteStackView: UIStackView!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var friendListTableView: UITableView!
+    
+    var heightConstraint: NSLayoutConstraint!
     
     private let viewModel = FriendViewModel()
     
@@ -37,11 +40,16 @@ fileprivate extension FriendPageViewController {
     private func initView() -> Void {
         self.indicator.hidesWhenStopped = true
         
+        // 搜尋匡
+        self.searchBar.delegate = self
+        
         let nib = UINib(nibName: "\(FriendListTableViewCell.self)", bundle: nil)
         self.friendListTableView.register(nib, forCellReuseIdentifier: "\(FriendListTableViewCell.self)")
-        
         self.friendListTableView.delegate = self
         self.friendListTableView.dataSource = self
+        
+        heightConstraint = self.inviteStackView.heightAnchor.constraint(equalToConstant: 150)
+        heightConstraint.isActive = true
     }
     
     /** 將 ViewModel Data 與 UI Binding*/
@@ -70,11 +78,13 @@ fileprivate extension FriendPageViewController {
             .store(in: &cancellables)
         
         // Friend List 綁定
-        viewModel.$friends
+        viewModel.$filterFriend
             .receive(on: DispatchQueue.main)
             .sink { _ in
-            } receiveValue: { [weak self] _ in
+            } receiveValue: { [weak self] friends in
                 self?.friendListTableView.reloadData()
+                self?.heightConstraint.constant = friends.count > 0 ? 150 : 0
+                self?.view.layoutIfNeeded()
             }
             .store(in: &cancellables)
 
@@ -105,10 +115,12 @@ fileprivate extension FriendPageViewController {
 
 extension FriendPageViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("123 \(searchText)")
         self.viewModel.filterFriend(input: searchText)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("555")
         self.viewModel.filterFriend(input: "")
     }
 }
@@ -120,7 +132,7 @@ extension FriendPageViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.friends.count
+        self.viewModel.filterFriend.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,7 +141,7 @@ extension FriendPageViewController : UITableViewDelegate, UITableViewDataSource 
             return UITableViewCell()
         }
         
-        let data = self.viewModel.friends[indexPath.row]
+        let data = self.viewModel.filterFriend[indexPath.row]
         cell.setData(friend: data)
         
         return cell

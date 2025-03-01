@@ -12,6 +12,7 @@ class FriendViewModel : BaseViewModel {
     
     @Published var userInfo: User? = nil
     @Published var friends: [Friend] = []
+    @Published var filterFriend: [Friend] = []
     
     private let repository: FriendRepositoryProtocol
 
@@ -30,7 +31,6 @@ class FriendViewModel : BaseViewModel {
         repository.fetchUserInfo()
             .delay(for: .seconds(2), scheduler: DispatchQueue.global())
             .sink(receiveCompletion: { _ in
-                print("completion")
                 self.hideLoading()
             }, receiveValue: { rsData in
                 if let user = rsData.response.first {
@@ -69,6 +69,7 @@ class FriendViewModel : BaseViewModel {
                 self.hideLoading()
             }, receiveValue: { friendArray in
                 self.friends = friendArray
+                self.filterFriend = friendArray
             })
             .store(in: &cancellables)
     }
@@ -86,11 +87,21 @@ class FriendViewModel : BaseViewModel {
                 self.hideLoading()
             }, receiveValue: { friendArray in
                 self.friends = friendArray.response
+                self.filterFriend = friendArray.response
             })
             .store(in: &cancellables)
     }
     
     func filterFriend(input: String) -> Void {
-        
+        self.filterFriend.removeAll()
+        if (input.isEmpty) {
+            self.filterFriend = self.friends
+        } else {
+            let result = friends.filter {
+                $0.name.contains(input.lowercased())
+            }
+            self.filterFriend.removeAll()
+            self.filterFriend = result
+        }
     }
 }
