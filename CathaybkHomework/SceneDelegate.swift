@@ -21,6 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 調整 Navigation tint
         UINavigationBar.appearance().tintColor = UIColor(named: "tabSelectedColor")
         
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
         window?.rootViewController = KokoTabBarController()
         window?.makeKeyAndVisible()
     }

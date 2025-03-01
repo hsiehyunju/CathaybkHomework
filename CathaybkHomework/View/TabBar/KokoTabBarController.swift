@@ -22,7 +22,22 @@ fileprivate extension KokoTabBarController {
     
     /** 初始設定 TabBar */
     func setupTabBarParam() {
-        tabBar.tintColor = UIColor(named: "tabSelectedColor")
+        
+        let selectedItemTineColor = UIColor(named: "tabSelectedColor")
+        let backgroundColor = UIColor.white
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = backgroundColor
+            appearance.stackedLayoutAppearance.selected.iconColor = selectedItemTineColor
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: selectedItemTineColor as Any]
+
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
+        } else {
+            tabBar.tintColor = selectedItemTineColor
+            tabBar.backgroundColor = backgroundColor
+        }
     }
     
     /** 添加水平線 */
