@@ -12,9 +12,10 @@ class FriendPageViewController : UIViewController {
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var userInfoView: UserInfoView!
+    @IBOutlet weak var inviteStackView: UIStackView!
+    @IBOutlet weak var friendListTableView: UITableView!
     
-    let viewModel = FriendViewModel()
-    
+    private let viewModel = FriendViewModel()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -29,10 +30,18 @@ class FriendPageViewController : UIViewController {
             self.viewModel.fetchFriendList(requestType: type)
         }
     }
-    
+}
+
+fileprivate extension FriendPageViewController {
     /** 初始化 View */
     private func initView() -> Void {
         self.indicator.hidesWhenStopped = true
+        
+        let nib = UINib(nibName: "\(FriendListTableViewCell.self)", bundle: nil)
+        self.friendListTableView.register(nib, forCellReuseIdentifier: "\(FriendListTableViewCell.self)")
+        
+        self.friendListTableView.delegate = self
+        self.friendListTableView.dataSource = self
     }
     
     /** 將 ViewModel Data 與 UI Binding*/
@@ -59,6 +68,16 @@ class FriendPageViewController : UIViewController {
                 }
             }
             .store(in: &cancellables)
+        
+        // Friend List 綁定
+        viewModel.$friends
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: { [weak self] _ in
+                self?.friendListTableView.reloadData()
+            }
+            .store(in: &cancellables)
+
     }
     
     /** 初始化資料 */
@@ -73,7 +92,7 @@ class FriendPageViewController : UIViewController {
             message: "模擬 Server 回傳好友列表的 json",
             preferredStyle: .actionSheet
         )
-
+        
         for type in EFriendRequestType.allCases {
             alert.addAction(UIAlertAction(title: type.toString(), style: .default) { _ in
                 completion(type)
@@ -84,5 +103,37 @@ class FriendPageViewController : UIViewController {
     }
 }
 
+extension FriendPageViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.viewModel.filterFriend(input: searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.viewModel.filterFriend(input: "")
+    }
+}
 
+extension FriendPageViewController : UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.viewModel.friends.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(FriendListTableViewCell.self)", for: indexPath) as? FriendListTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let data = self.viewModel.friends[indexPath.row]
+        cell.setData(friend: data)
+        
+        return cell
+        
+    }
 
+}

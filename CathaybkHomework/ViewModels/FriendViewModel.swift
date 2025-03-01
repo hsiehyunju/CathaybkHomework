@@ -89,4 +89,8 @@ class FriendViewModel : BaseViewModel {
             })
             .store(in: &cancellables)
     }
+    
+    func filterFriend(input: String) -> Void {
+        
+    }
 }
