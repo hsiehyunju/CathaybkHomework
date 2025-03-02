@@ -8,22 +8,23 @@
 - MVVM 架構
 - 透過 Combine 處理 api、data
 
-<figure style="display: inline-block; text-align: center; margin: 10px;">
+
+<figure style="display: inline-block; inline-block; text-align: center; margin: 10px;">
+     <figcaption>選擇朋友</figcaption>
     <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/Choose.png" width="25%" height="100%">
-    <figcaption>選擇朋友</figcaption>
 </figure>
 
 <figure style="display: inline-block; text-align: center; margin: 10px;">
-    <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/EmptyFriend.png" width="25%" height="100%">
     <figcaption>沒有朋友</figcaption>
+    <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/EmptyFriend.png" width="25%" height="100%">
 </figure>
 
 <figure style="display: inline-block; text-align: center; margin: 10px;">
-    <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/HasInvite.png" width="25%" height="100%">
     <figcaption>有邀請</figcaption>
+    <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/HasInvite.png" width="25%" height="100%">
 </figure>
 
 <figure style="display: inline-block; text-align: center; margin: 10px;">
-    <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/OnlyFriend.png" width="25%" height="100%">
     <figcaption>只有朋友</figcaption>
+    <img src="https://github.com/hsiehyunju/CathaybkHomework/blob/main/Capture/OnlyFriend.png" width="25%" height="100%">
 </figure>
