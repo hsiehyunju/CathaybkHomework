@@ -25,7 +25,6 @@ extension FriendListTableViewCell {
     
     func initView() -> Void {
         self.transferBtn.layer.borderColor = UIColor.tabSelected.cgColor
-        
         self.inviteBtn.layer.borderColor = UIColor.gray.cgColor
     }
     

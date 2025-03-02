@@ -12,7 +12,7 @@ class FriendPageViewController : UIViewController {
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var userInfoView: UserInfoView!
-    @IBOutlet weak var inviteStackView: UIStackView!
+    @IBOutlet weak var inviteTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var friendListTableView: UITableView!
     @IBOutlet weak var searchGroupView: UIStackView!
@@ -50,7 +50,14 @@ fileprivate extension FriendPageViewController {
         self.friendListTableView.delegate = self
         self.friendListTableView.dataSource = self
         
-        heightConstraint = self.inviteStackView.heightAnchor.constraint(equalToConstant: 150)
+        // 邀請列表
+        self.inviteTableView.tag = 1
+        self.inviteTableView.delegate = self
+        self.inviteTableView.dataSource = self
+        let inviteNib = UINib(nibName: "\(InviteItemView.self)", bundle: nil)
+        self.inviteTableView.register(inviteNib, forCellReuseIdentifier: "\(InviteItemView.self)")
+        
+        heightConstraint = self.inviteTableView.heightAnchor.constraint(equalToConstant: 0)
         heightConstraint.isActive = true
     }
     
@@ -84,21 +91,22 @@ fileprivate extension FriendPageViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
             } receiveValue: { [weak self] friends in
-                
                 if (friends.isEmpty) {
                     self?.emptyView.isHidden = false
                     self?.friendListTableView.isHidden = true
                     self?.searchGroupView.isHidden = true
                 } else {
-                    
                     self?.emptyView.isHidden = true
                     self?.friendListTableView.isHidden = false
                     self?.searchGroupView.isHidden = false
                 }
                 
-                
+                self?.inviteTableView.reloadData()
                 self?.friendListTableView.reloadData()
-                self?.heightConstraint.constant = friends.count > 0 ? 150 : 0
+                
+                if let inviteCount = self?.viewModel.filterFriend.count {
+                    self?.heightConstraint.constant = (inviteCount == 0) ? 0 : (self?.inviteTableView.contentSize.height ?? 0) + 40
+                }
                 self?.view.layoutIfNeeded()
             }
             .store(in: &cancellables)
@@ -145,20 +153,32 @@ extension FriendPageViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.viewModel.filterFriend.count
+        if (tableView.tag == 1) {
+            return self.viewModel.inviteList.count
+        } else {
+            return self.viewModel.filterFriend.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(FriendListTableViewCell.self)", for: indexPath) as? FriendListTableViewCell else {
-            return UITableViewCell()
+        if (tableView.tag == 1) {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(InviteItemView.self)", for: indexPath) as? InviteItemView else {
+                return UITableViewCell()
+            }
+            
+            let data = self.viewModel.inviteList[indexPath.row]
+            cell.setData(friend: data)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(FriendListTableViewCell.self)", for: indexPath) as? FriendListTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            let data = self.viewModel.filterFriend[indexPath.row]
+            cell.setData(friend: data)
+            return cell
         }
-        
-        let data = self.viewModel.filterFriend[indexPath.row]
-        cell.setData(friend: data)
-        
-        return cell
-        
     }
 
 }

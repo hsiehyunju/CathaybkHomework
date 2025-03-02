@@ -13,6 +13,7 @@ class FriendViewModel : BaseViewModel {
     @Published var userInfo: User? = nil
     @Published var friends: [Friend] = []
     @Published var filterFriend: [Friend] = []
+    @Published var inviteList: [Friend] = []
     
     private let repository: FriendRepositoryProtocol
 
@@ -68,14 +69,16 @@ class FriendViewModel : BaseViewModel {
             .sink(receiveCompletion: { _ in
                 self.hideLoading()
             }, receiveValue: { friendArray in
-                self.friends = friendArray
-                self.filterFriend = friendArray
+                if let array = friendArray as? [Friend] {
+                    self.friends = array
+                    self.filterFriend = self.friends
+                    self.inviteList = array.filter { $0.hasRequestInvite() }
+                }
             })
             .store(in: &cancellables)
     }
     
     private func fetchOtherType(requestType: EFriendRequestType) -> Void {
-        
         let publisher = if (requestType == .NoFriend) {
             repository.fetchEmptyFriendData()
         } else {
@@ -86,8 +89,12 @@ class FriendViewModel : BaseViewModel {
             .sink(receiveCompletion: { _ in
                 self.hideLoading()
             }, receiveValue: { friendArray in
-                self.friends = friendArray.response
-                self.filterFriend = friendArray.response
+                print(friendArray)
+                if let array = friendArray.response as? [Friend] {
+                    self.friends = array
+                    self.filterFriend = self.friends
+                    self.inviteList = array.filter { $0.hasRequestInvite() }
+                }
             })
             .store(in: &cancellables)
     }

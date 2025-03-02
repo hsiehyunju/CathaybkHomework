@@ -24,15 +24,8 @@
                                     <constraint firstAttribute="height" constant="80" id="7Kh-Cx-mbg"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1YL-e2-1G3">
-                                <rect key="frame" x="0.0" y="139" width="393" height="150"/>
-                                <color key="backgroundColor" name="tabSelectedColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="4ba-5V-wJ7"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="X3W-32-Iz7" userLabel="TabLayout">
-                                <rect key="frame" x="50" y="309" width="343" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="X3W-32-Iz7" userLabel="TabLayout">
+                                <rect key="frame" x="50" y="329" width="343" height="30"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="INi-1Q-aYF" userLabel="Friend">
                                         <rect key="frame" x="0.0" y="0.0" width="26" height="30"/>
@@ -89,8 +82,8 @@
                                     <constraint firstAttribute="height" constant="30" id="idl-IM-zfC"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg0-mx-gOy" userLabel="Divider">
-                                <rect key="frame" x="0.0" y="339" width="393" height="1"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cg0-mx-gOy" userLabel="Divider">
+                                <rect key="frame" x="0.0" y="359" width="393" height="1"/>
                                 <viewLayoutGuide key="safeArea" id="n0s-pX-Qkp"/>
                                 <color key="backgroundColor" name="tabDividerColor"/>
                                 <constraints>
@@ -102,8 +95,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHU-Uo-v4M" userLabel="Search Stack View">
-                                <rect key="frame" x="20" y="360" width="353" height="36"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BHU-Uo-v4M" userLabel="Search Stack View">
+                                <rect key="frame" x="20" y="380" width="353" height="36"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" placeholder="想轉一筆給誰呢？" backgroundImage="icAddFriendWhite" translatesAutoresizingMaskIntoConstraints="NO" id="H6l-oU-e46">
                                         <rect key="frame" x="0.0" y="0.0" width="303" height="36"/>
@@ -125,19 +118,23 @@
                                     <constraint firstAttribute="height" constant="36" id="SPS-l9-GmJ"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3f-rb-OUM" userLabel="FriendList">
-                                <rect key="frame" x="0.0" y="416" width="393" height="402"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3f-rb-OUM" userLabel="FriendList">
+                                <rect key="frame" x="0.0" y="436" width="393" height="382"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="tabSelectedColor"/>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psv-Np-NWz" userLabel="Empty View" customClass="EmptyFriendView" customModule="CathaybkHomework" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="349" width="393" height="469"/>
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="psv-Np-NWz" userLabel="Empty View" customClass="EmptyFriendView" customModule="CathaybkHomework" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="368" width="393" height="449"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="Zng-bw-SdW">
                                 <rect key="frame" x="186" y="416" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HeX-hV-mTI" userLabel="InviteList">
+                                <rect key="frame" x="20" y="147" width="353" height="174"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -145,19 +142,19 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="X3W-32-Iz7" secondAttribute="trailing" id="1bc-I7-Cg7"/>
                             <constraint firstItem="UVj-lh-vjU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4yJ-PC-qgT"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="V3f-rb-OUM" secondAttribute="bottom" id="6rc-fu-ku9"/>
-                            <constraint firstItem="1YL-e2-1G3" firstAttribute="trailing" secondItem="UVj-lh-vjU" secondAttribute="trailing" id="ALb-lW-LKL"/>
                             <constraint firstItem="V3f-rb-OUM" firstAttribute="top" secondItem="BHU-Uo-v4M" secondAttribute="bottom" constant="20" id="BAK-Wp-paK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cg0-mx-gOy" secondAttribute="trailing" id="IIK-jR-P7Q"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="V3f-rb-OUM" secondAttribute="trailing" id="IcY-LQ-hCR"/>
-                            <constraint firstItem="1YL-e2-1G3" firstAttribute="leading" secondItem="UVj-lh-vjU" secondAttribute="leading" id="O6N-OS-zfh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HeX-hV-mTI" secondAttribute="trailing" constant="20" id="Qa8-Go-pZh"/>
                             <constraint firstItem="BHU-Uo-v4M" firstAttribute="top" secondItem="cg0-mx-gOy" secondAttribute="bottom" constant="20" id="T6u-Y7-zpu"/>
+                            <constraint firstItem="HeX-hV-mTI" firstAttribute="top" secondItem="UVj-lh-vjU" secondAttribute="bottom" id="Uhn-bz-Xdg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="psv-Np-NWz" secondAttribute="bottom" id="Xah-Ix-ISN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="BHU-Uo-v4M" secondAttribute="trailing" constant="20" id="azn-AW-8lk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UVj-lh-vjU" secondAttribute="trailing" id="d85-Cb-8PO"/>
-                            <constraint firstItem="X3W-32-Iz7" firstAttribute="top" secondItem="1YL-e2-1G3" secondAttribute="bottom" constant="20" id="dse-rR-zr2"/>
+                            <constraint firstItem="X3W-32-Iz7" firstAttribute="top" secondItem="HeX-hV-mTI" secondAttribute="bottom" constant="20" id="dse-rR-zr2"/>
                             <constraint firstItem="psv-Np-NWz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ekz-hc-n9G"/>
                             <constraint firstItem="cg0-mx-gOy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iXK-U4-AXg"/>
-                            <constraint firstItem="1YL-e2-1G3" firstAttribute="top" secondItem="UVj-lh-vjU" secondAttribute="bottom" id="kw1-5m-KCC"/>
+                            <constraint firstItem="HeX-hV-mTI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="laI-pp-kts"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="psv-Np-NWz" secondAttribute="trailing" id="p9N-xG-8p3"/>
                             <constraint firstItem="UVj-lh-vjU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="pJO-8N-uRT"/>
                             <constraint firstItem="X3W-32-Iz7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="rJw-6M-tHu"/>
@@ -171,7 +168,7 @@
                         <outlet property="emptyView" destination="psv-Np-NWz" id="aho-kr-DQe"/>
                         <outlet property="friendListTableView" destination="V3f-rb-OUM" id="8En-vm-2LT"/>
                         <outlet property="indicator" destination="Zng-bw-SdW" id="oxI-i0-K6z"/>
-                        <outlet property="inviteStackView" destination="1YL-e2-1G3" id="t4g-Be-lxL"/>
+                        <outlet property="inviteTableView" destination="HeX-hV-mTI" id="s3u-m4-MZy"/>
                         <outlet property="searchBar" destination="H6l-oU-e46" id="GnD-0b-PAc"/>
                         <outlet property="searchGroupView" destination="BHU-Uo-v4M" id="Bh0-tt-OFN"/>
                         <outlet property="userInfoView" destination="UVj-lh-vjU" id="iMA-xT-4MO"/>
@@ -179,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117" y="-28"/>
+            <point key="canvasLocation" x="116.79389312977099" y="-28.169014084507044"/>
         </scene>
     </scenes>
     <resources>

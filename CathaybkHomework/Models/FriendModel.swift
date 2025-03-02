@@ -26,6 +26,11 @@ extension Friend {
     
     /** 是否已經送出邀請 */
     func isInvite() -> Bool {
+        return status == 0
+    }
+    
+    /** 對方是否請求好友 */
+    func hasRequestInvite() -> Bool {
         return status == 2
     }
 }
