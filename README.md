@@ -4,6 +4,8 @@
 - 搜尋匡支援好友查找
 - 好友列表支援下拉更新
 
+---
+
 - 使用 UIKit
 - MVVM 架構
 - 透過 Combine 處理 api、data
