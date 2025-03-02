@@ -89,7 +89,6 @@ class FriendViewModel : BaseViewModel {
             .sink(receiveCompletion: { _ in
                 self.hideLoading()
             }, receiveValue: { friendArray in
-                print(friendArray)
                 if let array = friendArray.response as? [Friend] {
                     self.friends = array
                     self.filterFriend = self.friends
