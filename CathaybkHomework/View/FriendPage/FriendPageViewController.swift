@@ -19,9 +19,9 @@ class FriendPageViewController : UIViewController {
     @IBOutlet weak var emptyView: EmptyFriendView!
     
     var heightConstraint: NSLayoutConstraint!
+    let friendListRefreshControl = UIRefreshControl()
     
     private let viewModel = FriendViewModel()
-    
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -31,24 +31,28 @@ class FriendPageViewController : UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.showFriendRequestSelection { type in
-            self.viewModel.fetchFriendList(requestType: type)
-        }
+        self.loadData()
     }
 }
 
 fileprivate extension FriendPageViewController {
     /** 初始化 View */
-    private func initView() -> Void {
+    func initView() -> Void {
         self.indicator.hidesWhenStopped = true
         
         // 搜尋匡
         self.searchBar.delegate = self
         
+        // 好友列表
         let nib = UINib(nibName: "\(FriendListTableViewCell.self)", bundle: nil)
         self.friendListTableView.register(nib, forCellReuseIdentifier: "\(FriendListTableViewCell.self)")
         self.friendListTableView.delegate = self
         self.friendListTableView.dataSource = self
+        
+        // 好友列表下拉更新
+        self.friendListRefreshControl.attributedTitle = NSAttributedString(string: "好友列表更新中")
+        self.friendListRefreshControl.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+        self.friendListTableView.refreshControl = friendListRefreshControl
         
         // 邀請列表
         self.inviteTableView.tag = 1
@@ -62,7 +66,7 @@ fileprivate extension FriendPageViewController {
     }
     
     /** 將 ViewModel Data 與 UI Binding*/
-    private func bindViewModel() -> Void {
+    func bindViewModel() -> Void {
         
         // Loading 與 indicator 綁定處理
         viewModel.$isLoading
@@ -103,6 +107,7 @@ fileprivate extension FriendPageViewController {
                 
                 self?.inviteTableView.reloadData()
                 self?.friendListTableView.reloadData()
+                self?.friendListRefreshControl.endRefreshing()
                 
                 if let inviteCount = self?.viewModel.filterFriend.count {
                     self?.heightConstraint.constant = (inviteCount == 0) ? 0 : (self?.inviteTableView.contentSize.height ?? 0) + 40
@@ -114,8 +119,14 @@ fileprivate extension FriendPageViewController {
     }
     
     /** 初始化資料 */
-    private func initData() {
+    func initData() {
         self.viewModel.fetchUserInfo()
+    }
+    
+    @objc func loadData() -> Void {
+        self.showFriendRequestSelection { type in
+            self.viewModel.fetchFriendList(requestType: type)
+        }
     }
     
     /** 選 Api 類型 Alert */
