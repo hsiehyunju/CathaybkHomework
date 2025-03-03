@@ -30,7 +30,6 @@ class FriendViewModel : BaseViewModel {
         self.showLoading()
         
         repository.fetchUserInfo()
-            .delay(for: .seconds(2), scheduler: DispatchQueue.global())
             .sink(receiveCompletion: { _ in
                 self.hideLoading()
             }, receiveValue: { rsData in
